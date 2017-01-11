@@ -37,6 +37,14 @@ Process all files inside a directory:
 	Adding file prof_01012017_26378.prof
 	Writing results to combined.prof
 
+Print results into combined.txt ordered by cumulative time and apply 'lib64'
+filter:
+
+.. code-block:: bash
+
+	$ prof_merger -i combined.prof --txt combined.txt -s cumulative -p lib64
+	Writing text results to combined.txt
+
 =============
 TODO
 =============
