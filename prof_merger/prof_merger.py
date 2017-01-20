@@ -89,14 +89,18 @@ def main():
             out_stream.close()
         sys.exit(1)
 
-    try:
-        stats.sort_stats(args.stats_sort)
-    except KeyError:
-        print("Wrong sort value '%s'" % args.stats_sort)
+    if not stats and out_stream:
+            os.unlink(out_stream.name)
+	    print("No stats produced")
     else:
-        print("Writing text results to %s" % args.txt_file)
-        statsfilter = [int(s) if s.isdigit() else s for s in args.stats_filter]
-        stats.print_stats(*statsfilter)
+        try:
+            stats.sort_stats(args.stats_sort)
+        except KeyError:
+            print("Wrong sort value '%s'" % args.stats_sort)
+        else:
+            print("Writing text results to %s" % args.txt_file)
+            statsfilter = [int(s) if s.isdigit() else s for s in args.stats_filter]
+            stats.print_stats(*statsfilter)
     out_stream.close()
 
 if __name__ == "__main__":
